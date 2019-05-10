@@ -31,11 +31,4 @@ public interface EmploymentRepository {
     @Delete("DELETE FROM Employment")
     void deleteAll();
 
-    @Select("SELECT * FROM EmployeeHistory")
-    List<EmployeeHistory> findAllResult();
-
-    @Select("SELECT * FROM EmployeeHistory " +
-            "WHERE name LIKE #{nameQuery}")
-    List<EmployeeHistory> findEmployeesWithName(String nameQuery);
-
 }

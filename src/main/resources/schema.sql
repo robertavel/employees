@@ -16,3 +16,10 @@ CREATE TABLE Employment
   salary      DECIMAL     NOT NULL,
   FOREIGN KEY (employeeId) REFERENCES Employee (id) ON DELETE CASCADE
 );
+
+CREATE VIEW EmployeeHistory AS
+SELECT e.name, e.surname, h.companyName
+FROM Employee e
+       INNER JOIN Employment h
+                  ON e.id = h.employeeId
+

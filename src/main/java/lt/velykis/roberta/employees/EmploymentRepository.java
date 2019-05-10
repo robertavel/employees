@@ -31,15 +31,11 @@ public interface EmploymentRepository {
     @Delete("DELETE FROM Employment")
     void deleteAll();
 
-    @Select("SELECT e.name, e.surname, h.companyName " +
-            "FROM Employee e " +
-            "INNER JOIN Employment h ON e.id = h.employeeId")
+    @Select("SELECT * FROM EmployeeHistory")
     List<EmployeeHistory> findAllResult();
 
-    @Select("SELECT e.name, e.surname, h.companyName " +
-            "FROM Employee e " +
-            "INNER JOIN Employment h ON e.id = h.employeeId " +
-            "WHERE e.name LIKE #{nameQuery}")
+    @Select("SELECT * FROM EmployeeHistory " +
+            "WHERE name LIKE #{nameQuery}")
     List<EmployeeHistory> findEmployeesWithName(String nameQuery);
 
 }

@@ -59,7 +59,7 @@ public class EmployeeHistoryTest {
 
         Employee employee1 = new Employee(null, "Tadas", "Kavaliauskas", LocalDate.of(1989, 1, 12));
         employeeRepository.insert(employee1);
-        Employee employee2 = new Employee(null, "Andrius", "Jankauskas", LocalDate.of(1990, 1, 12));
+        Employee employee2 = new Employee(null, "Andrius", "Kazlauskas", LocalDate.of(1990, 1, 12));
         employeeRepository.insert(employee2);
         Employee employee3 = new Employee(null, "Antanas", "Petrulis", LocalDate.of(1990, 3, 12));
         employeeRepository.insert(employee3);
@@ -68,16 +68,16 @@ public class EmployeeHistoryTest {
         employmentRepository.insert(history1);
         Employment history2 = new Employment(null, employee2.getId(), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
         employmentRepository.insert(history2);
-        Employment history3 = new Employment(null, employee3.getId(), LocalDate.of(2016, 10, 11), LocalDate.of(2016, 11, 11), "IKI", new BigDecimal("1030"));
+        Employment history3 = new Employment(null, employee1.getId(), LocalDate.of(2016, 10, 11), LocalDate.of(2016, 11, 11), "IKI", new BigDecimal("1030"));
         employmentRepository.insert(history3);
         Employment history4 = new Employment(null, employee3.getId(), LocalDate.of(2017, 10, 11), LocalDate.of(2018, 11, 11), "Rimi", new BigDecimal("1040"));
         employmentRepository.insert(history4);
 
-        EmployeeHistory employeeHistoryExp1 = new EmployeeHistory("Andrius", "Jankauskas", "Senukai");
-        EmployeeHistory employeeHistoryExp2 = new EmployeeHistory("Antanas", "Petrulis", "IKI");
-        EmployeeHistory employeeHistoryExp3 = new EmployeeHistory("Antanas", "Petrulis", "Rimi");
-        List<EmployeeHistory> employeeHistory = historyRepository.findByEmployeeName("An%");
+        EmployeeHistory employeeHistoryExp1 = new EmployeeHistory("Tadas", "Kavaliauskas", "Maxima");
+        EmployeeHistory employeeHistoryExp2 = new EmployeeHistory("Tadas", "Kavaliauskas", "IKI");
+        EmployeeHistory employeeHistoryExp3 = new EmployeeHistory("Andrius", "Kazlauskas", "Senukai");
+        List<EmployeeHistory> employeeHistory = historyRepository.findByEmployeeSurname("Ka%");
 
-        assertThat(employeeHistory).containsExactly(employeeHistoryExp1, employeeHistoryExp2, employeeHistoryExp3);
+        assertThat(employeeHistory).containsExactlyInAnyOrder(employeeHistoryExp1, employeeHistoryExp2, employeeHistoryExp3);
     }
 }

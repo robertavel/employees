@@ -14,7 +14,7 @@ public interface EmployeeHistoryRepository {
     List<EmployeeHistory> findAll();
 
     @Select("SELECT * FROM EmployeeHistory " +
-            "WHERE name LIKE #{nameQuery}")
-    List<EmployeeHistory> findByEmployeeName(String nameQuery);
+            "WHERE surname LIKE #{surnameQuery}")
+    List<EmployeeHistory> findByEmployeeSurname(String surnameQuery);
 
 }

@@ -31,12 +31,12 @@ public interface EmploymentRepository {
     @Delete("DELETE FROM Employment")
     void deleteAll();
 
-    @Select("SELECT e.id AS employeeId, e.name, e.surname, e.dob, h.dateFrom, h.dateUntil, h.companyName, h.salary " +
+    @Select("SELECT e.name, e.surname, h.companyName " +
             "FROM Employee e " +
             "INNER JOIN Employment h ON e.id = h.employeeId")
     List<EmployeeHistory> findAllResult();
 
-    @Select("SELECT e.id AS employeeId, e.name, e.surname, e.dob, h.dateFrom, h.dateUntil, h.companyName, h.salary " +
+    @Select("SELECT e.name, e.surname, h.companyName " +
             "FROM Employee e " +
             "INNER JOIN Employment h ON e.id = h.employeeId " +
             "WHERE e.name LIKE #{nameQuery}")

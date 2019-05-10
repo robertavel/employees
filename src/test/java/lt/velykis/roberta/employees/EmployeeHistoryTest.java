@@ -44,8 +44,8 @@ public class EmployeeHistoryTest {
         Employment history2 = new Employment(null, employee2.getId(), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
         historyRepository.insert(history2);
 
-        EmployeeHistory employeeHistory2 = new EmployeeHistory(employee1.getId(), "Tadas", "Kavaliauskas", LocalDate.of(1989, 1, 12), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Maxima", new BigDecimal("1000"));
-        EmployeeHistory employeeHistory3 = new EmployeeHistory(employee2.getId(), "Andrius", "Jankauskas", LocalDate.of(1990, 1, 12), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
+        EmployeeHistory employeeHistory2 = new EmployeeHistory("Tadas", "Kavaliauskas", "Maxima");
+        EmployeeHistory employeeHistory3 = new EmployeeHistory("Andrius", "Jankauskas", "Senukai");
 
         List<EmployeeHistory> employeeHistory = historyRepository.findAllResult();
 
@@ -71,9 +71,9 @@ public class EmployeeHistoryTest {
         Employment history4 = new Employment(null, employee3.getId(), LocalDate.of(2017, 10, 11), LocalDate.of(2018, 11, 11), "Rimi", new BigDecimal("1040"));
         historyRepository.insert(history4);
 
-        EmployeeHistory employeeHistoryExp1 = new EmployeeHistory(employee2.getId(), "Andrius", "Jankauskas", LocalDate.of(1990, 1, 12), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
-        EmployeeHistory employeeHistoryExp2 = new EmployeeHistory(employee3.getId(), "Antanas", "Petrulis", LocalDate.of(1990, 3, 12), LocalDate.of(2016, 10, 11), LocalDate.of(2016, 11, 11), "IKI", new BigDecimal("1030"));
-        EmployeeHistory employeeHistoryExp3 = new EmployeeHistory(employee3.getId(), "Antanas", "Petrulis", LocalDate.of(1990, 3, 12), LocalDate.of(2017, 10, 11), LocalDate.of(2018, 11, 11), "Rimi", new BigDecimal("1040"));
+        EmployeeHistory employeeHistoryExp1 = new EmployeeHistory("Andrius", "Jankauskas", "Senukai");
+        EmployeeHistory employeeHistoryExp2 = new EmployeeHistory("Antanas", "Petrulis", "IKI");
+        EmployeeHistory employeeHistoryExp3 = new EmployeeHistory("Antanas", "Petrulis", "Rimi");
         List<EmployeeHistory> employeeHistory = historyRepository.findEmployeesWithName("An%");
 
         assertThat(employeeHistory).containsExactly(employeeHistoryExp1, employeeHistoryExp2, employeeHistoryExp3);

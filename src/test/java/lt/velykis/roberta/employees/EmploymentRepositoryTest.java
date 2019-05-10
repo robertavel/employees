@@ -21,10 +21,18 @@ public class EmploymentRepositoryTest {
 
     @Autowired
     private EmploymentRepository repository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    private Employee employee1;
 
     @Before
     public void setUp() {
         repository.deleteAll();
+        employeeRepository.deleteAll();
+
+        employee1 = new Employee(null, "Tadas", "Kavaliauskas", LocalDate.of(1989, 1, 12));
+        employeeRepository.insert(employee1);
     }
 
     @Test
@@ -37,7 +45,7 @@ public class EmploymentRepositoryTest {
     @Test
     public void findAll_single() {
 
-        Employment employment1 = new Employment(null, 3L, LocalDate.of(2010, 12, 11), LocalDate.of(2012, 11, 11), "Sanitex", new BigDecimal("900"));
+        Employment employment1 = new Employment(null, employee1.getId(), LocalDate.of(2010, 12, 11), LocalDate.of(2012, 11, 11), "Sanitex", new BigDecimal("900"));
         repository.insert(employment1);
         assertThat(employment1.getId()).isNotNull();
 
@@ -48,7 +56,7 @@ public class EmploymentRepositoryTest {
     @Test
     public void findSingle() {
 
-        Employment employment1 = new Employment(null, 3L, LocalDate.of(2010, 12, 11), LocalDate.of(2012, 11, 11), "Sanitex", new BigDecimal("900"));
+        Employment employment1 = new Employment(null, employee1.getId(), LocalDate.of(2010, 12, 11), LocalDate.of(2012, 11, 11), "Sanitex", new BigDecimal("900"));
         repository.insert(employment1);
         assertThat(employment1.getId()).isNotNull();
 
@@ -59,10 +67,10 @@ public class EmploymentRepositoryTest {
     @Test
     public void update() {
 
-        Employment employment1 = new Employment(null, 3L, LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
+        Employment employment1 = new Employment(null, employee1.getId(), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
         repository.insert(employment1);
 
-        Employment updatedHistory = new Employment(employment1.getId(), 3L, LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Maxima", new BigDecimal("1000"));
+        Employment updatedHistory = new Employment(employment1.getId(), employee1.getId(), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Maxima", new BigDecimal("1000"));
         repository.update(updatedHistory);
 
         Employment employment2 = repository.find(updatedHistory.getId());
@@ -72,7 +80,7 @@ public class EmploymentRepositoryTest {
     @Test
     public void delete() {
 
-        Employment employment = new Employment(null, 3L, LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
+        Employment employment = new Employment(null, employee1.getId(), LocalDate.of(2014, 10, 11), LocalDate.of(2016, 11, 11), "Senukai", new BigDecimal("1000"));
         repository.insert(employment);
 
         repository.delete(employment.getId());
